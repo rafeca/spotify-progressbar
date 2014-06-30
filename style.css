@@ -1,25 +1,40 @@
+:host {
+  padding: 1px 0;
+  height: 4px;
+}
+
 .progressbar {
   width: 100%;
-  background: #161616;
-  height: 5px;
+  height: 100%;
+  background: #3e3e40;
   border-radius: 5px;
-  border: 1px solid #161616;
   position: relative;
 }
 
 .bar {
-  background-color: #006300;
+  background-color: #84bd00;
   height: 100%;
   position: relative;
+  border-radius: 5px;
 }
 
 .slider {
+  opacity: 0;
   position: absolute;
-  top: -3px;
-  right: -4px;
-  width: 9px;
-  height: 9px;
+  top: -4px;
+  right: -6px;
+  width: 11px;
+  height: 11px;
   background-color: #ccc;
   border-radius: 10px;
   border: 1px solid #333;
+}
+
+.progressbar:hover .slider {
+  opacity: 1;
+}
+
+:host(:hover) {
+  padding: 0;
+  height: 6px;
 }
