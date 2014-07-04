@@ -1,6 +1,6 @@
 {
   "name": "spotify-progressbar",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Polymer Web component for seekable progress bars",
   "dependencies": {
     "polymer": "~0.2.3"
