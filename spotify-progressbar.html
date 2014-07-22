@@ -1,0 +1,101 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element to render seekable progress bar. A mix between `<progress>` and `<input type="range">`
+
+##### Example
+
+    <spotify-progressbar value="10" max="100"></spotify-progressbar>
+
+@element spotify-progressbar
+@blurb Element to render seekable progress bar. A mix between `<progress>` and `<input type="range">`.
+@status beta
+@homepage https://github.com/rafeca/spotify-progressbar
+-->
+<polymer-element name="spotify-progressbar" attributes="value max">
+
+  <template>
+
+    <link rel="stylesheet" href="spotify-progressbar.css"/>
+
+    <div class="progressbar"
+      on-click="{{ onClick }}"
+      on-mouseDown="{{ onDragStart }}">
+      <div class="bar" style="width: {{ value / max * 100 }}%;">
+        <div class="slider">
+        </div>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+
+    var calcPositionX = function (x) {
+      var rect = this.getBoundingClientRect();
+      var scrollLeft = document.documentElement.scrollLeft;
+
+      var posX = Math.max(x, 0) - rect.left - scrollLeft;
+
+      return posX / rect.width * this.max;
+    };
+
+    Polymer('spotify-progressbar', {
+
+      /**
+       * The `value` attribute specifies the degree of completion of the bar.
+       *
+       * @attribute value
+       * @type number
+       * @default null
+       */
+
+      /**
+       * The `max` attribute specifies the maximum value of the bar.
+       *
+       * @attribute max
+       * @type number
+       * @default null
+       */
+
+       /**
+        * The `change` event is fired whenever the value is changed.
+        *
+        * @event change
+        * @param {Object} detail
+        *   @param {Array<Object>} detail.value The new value.
+        */
+
+      ready: function() {
+        this.onDragMove = this.onDragMove.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this)
+      },
+      onClick: function(e) {
+        this.value = calcPositionX.call(this, e.pageX);
+        this.fire('change', this.value);
+      },
+
+      onDragStart: function() {
+        this.fire('dragstart');
+        this.classList.add('dragging');
+        window.addEventListener('mousemove', this.onDragMove);
+        window.addEventListener('mouseup', this.onDragEnd);
+      },
+
+      onDragEnd: function(e) {
+        window.removeEventListener('mousemove', this.onDragMove);
+        window.removeEventListener('mouseup', this.onDragEnd);
+        this.classList.remove('dragging');
+        this.fire('dragend');
+        this.value = calcPositionX.call(this, e.pageX);
+        this.fire('change', this.value);
+      },
+
+      onDragMove: function(e) {
+        this.value = calcPositionX.call(this, e.pageX);
+      }
+    });
+
+  </script>
+
+</polymer-element>
