@@ -1,6 +1,7 @@
 :host {
   padding: 1px 0;
   height: 4px;
+  display: block;
 }
 
 .progressbar {

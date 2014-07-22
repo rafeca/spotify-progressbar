@@ -1,14 +1,10 @@
 {
   "name": "spotify-progressbar",
-  "version": "0.1.0",
-  "description": "Polymer Web component for seekable progress bars",
-  "dependencies": {
-    "polymer": "~0.2.3"
-  },
+  "version": "1.0.0",
   "authors": [
     "Rafael de Oleza"
   ],
-  "license": "MIT",
+  "description": "Polymer Web component for seekable progress bars",
   "keywords": [
     "web-component",
     "web-components",
@@ -17,5 +13,15 @@
     "progressbar",
     "range",
     "progress"
-  ]
+  ],
+  "main": "spotify-progressbar.html",
+  "license": "MIT",
+  "homepage": "https://github.com/rafeca/spotify-progressbar/",
+  "ignore": [
+    "**/.*"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.3.3",
+    "polymer-test-tools": "Polymer/polymer-test-tools#~0.3.3"
+  }
 }
